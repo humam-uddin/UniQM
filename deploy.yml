@@ -1,9 +1,9 @@
-- name: Deploy Docker image to Ubuntu host
+- name: Deploy Docker image to UniQm host
   hosts: uniqm_host
   become: yes  # Necessary to have root privileges
 
   tasks:
-    - name: Transfer Docker image tar file to target host
+    - name: Transfer Docker image tar file to Target host
       ansible.builtin.copy:
         src: uniqm.tar
         dest: /tmp/uniqm.tar
@@ -13,6 +13,6 @@
       args:
         chdir: /tmp/
 
-    - name: Run Docker container UniRSM
+    - name: Run Docker container UniQM
       ansible.builtin.shell: >
         docker run -v /etc/localtime:/etc/localtime:ro -d --net=host --restart=always -tid --name UniQM --privileged=true uniqm /sbin/init
